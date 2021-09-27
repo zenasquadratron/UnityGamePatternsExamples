@@ -1285,5 +1285,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube
       objectReference: {fileID: 0}
+    - target: {fileID: 6580345888342262414, guid: fe84fcdec973a41ce847f3120be52aed,
+        type: 3}
+      propertyPath: info
+      value: 
+      objectReference: {fileID: 11400000, guid: e657db68f106441ac8b947b880d68263,
+        type: 2}
+    - target: {fileID: 6580345888342262414, guid: fe84fcdec973a41ce847f3120be52aed,
+        type: 3}
+      propertyPath: panel
+      value: 
+      objectReference: {fileID: 560430891}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe84fcdec973a41ce847f3120be52aed, type: 3}

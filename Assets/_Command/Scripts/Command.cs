@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Command
 {
+    protected int index = 0;
+
     public virtual void Execute(string name, Transform transform)
     {
         Debug.Log(name + " executed a command.");
