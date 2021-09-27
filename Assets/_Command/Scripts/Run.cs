@@ -11,7 +11,7 @@ public class Run : Command
         runDistance = distance;
     }
 
-    public override void Execute(string name)
+    public override void Execute(string name, Transform transform)
     {
         // do the jump stuff
 

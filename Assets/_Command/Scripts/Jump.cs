@@ -13,9 +13,10 @@ public class Jump : Command
 
 
 
-    public override void Execute(string name)
+    public override void Execute(string name, Transform transform)
     {
         Debug.Log(name + " has jumped " + jumpHeight + " feet into the air!");
+        transform.Translate(Vector3.up * jumpHeight);
     }
 
 

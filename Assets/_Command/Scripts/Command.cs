@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Command
 {
-    public virtual void Execute(string name)
+    public virtual void Execute(string name, Transform transform)
     {
         Debug.Log(name + " executed a command.");
     }

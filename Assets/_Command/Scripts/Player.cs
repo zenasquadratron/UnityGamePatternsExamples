@@ -13,12 +13,12 @@ public class Player : Actor
         
         if (Input.GetKeyDown(KeyCode.J))
         {
-            jumpCommand.Execute(name);
+            jumpCommand.Execute(name, transform);
             commands.Add(jumpCommand);
         }
         else if (Input.GetKeyDown(KeyCode.R))
         {
-            runCommand.Execute(name);
+            runCommand.Execute(name, transform);
             commands.Add(runCommand);
         }
         else if (Input.GetKeyDown(KeyCode.L))

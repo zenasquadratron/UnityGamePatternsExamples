@@ -9,11 +9,11 @@ public class Griffon : Actor
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            jumpCommand.Execute(name);
+            jumpCommand.Execute(name, transform);
         }
         else if (Input.GetKeyDown(KeyCode.T))
         {
-            runCommand.Execute(name);
+            runCommand.Execute(name, transform);
         }
     }
 }
