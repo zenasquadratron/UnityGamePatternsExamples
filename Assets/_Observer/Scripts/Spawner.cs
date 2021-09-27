@@ -32,7 +32,7 @@ public class Spawner : MonoBehaviour
 
     void CreateObject()
     {
-        if (CurrentObjectCount <= maxObjects)
+        if (currentObjectCount < maxObjects)
         {
             int x = (int)Random.Range(-playAreaSize.x, playAreaSize.x);
             int z = (int)Random.Range(-playAreaSize.z, playAreaSize.z);
