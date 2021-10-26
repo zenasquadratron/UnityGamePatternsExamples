@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;
 
     public Event gEvent;
+    public Event deathEvent;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
         playerRb = GetComponent<Rigidbody>();
 
         Color color = new Color(0.5f, 0.5f, 0.5f);
+        
     }
 
     // Update is called once per frame
@@ -35,6 +37,11 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(collision.gameObject);
             gEvent.Occurred();
+        }
+        else if (collision.gameObject.CompareTag("DeathCube"))
+        {
+            // do the player died stuff
+            deathEvent.Occurred();
         }
     }
 }

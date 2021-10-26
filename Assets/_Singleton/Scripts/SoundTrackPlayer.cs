@@ -5,13 +5,17 @@ using UnityEngine;
 public class SoundTrackPlayer : MonoBehaviour
 {
     AudioManager audioManager;
+    AudioSource audioSource;
+
+    private static SoundTrackPlayer _instance;
 
     public List<AudioClip> clips;
 
     private void Awake()
     {
-        if (GameObject.Find("Soundtrack") == null)
+        if (_instance == null)
         {
+            _instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -24,24 +28,26 @@ public class SoundTrackPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        audioSource = GetComponent<AudioSource>();
         audioManager = AudioManager.Instance;
 
         foreach (AudioClip ac in clips)
         {
+            Debug.Log(ac.name);
             AudioManager.Instance.AddClip(ac);
 
-            audioManager.AddClip(ac);
+            //audioManager.AddClip(ac);
+
         }
+
+        audioSource.clip = AudioManager.Instance.GetAudioClip(0);
+        audioSource.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            AudioManager.Instance.PlayRandomClip();
-        }
+       
     }
 }
 

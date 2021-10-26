@@ -14,7 +14,7 @@ public class State
         ENTER, UPDATE, EXIT
     };
 
-    public STATE name;
+    public STATE state;
     public EVENT stage;
     protected State nextState;
 
@@ -23,9 +23,20 @@ public class State
         stage = EVENT.ENTER;
     }
 
-    public virtual void Enter() { stage = EVENT.UPDATE; }
-    public virtual void Update() { stage = EVENT.UPDATE;  }
-    public virtual void Exit() { stage = EVENT.EXIT; }
+    public virtual void Enter()
+    {
+        stage = EVENT.UPDATE;
+    }
+
+    public virtual void Update()
+    {
+        stage = EVENT.UPDATE;
+    }
+
+    public virtual void Exit()
+    {
+        stage = EVENT.EXIT;
+    }
 
     public State Process()
     {
@@ -46,7 +57,7 @@ public class Idle : State
 
     public Idle(Animator animator)
     {
-        name = STATE.IDLE;
+        state = STATE.IDLE;
         anim = animator;
         // Set Data
     }
@@ -55,6 +66,7 @@ public class Idle : State
     {
         // do the Enter
         anim.StopPlayback();
+
         base.Enter();
     }
 
@@ -63,7 +75,7 @@ public class Idle : State
         // do the Update
         // condition to exit
         anim.Play("something");
-        if (true)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             nextState = new State();
             stage = EVENT.EXIT;
@@ -73,6 +85,7 @@ public class Idle : State
     public override void Exit()
     {
         // do the Exit
+        anim.StopPlayback();
         base.Exit();
     }
 }
@@ -83,7 +96,7 @@ public class Walk : State
 
     public Walk(Animator animator)
     {
-        name = STATE.WALK;
+        state = STATE.WALK;
         anim = animator;
         // Set Data
     }
@@ -118,7 +131,7 @@ public class Attack : State
 
     public Attack(Animator animator)
     {
-        name = STATE.ATTACK;
+        state = STATE.ATTACK;
         anim = animator;
         // Set Data
     }

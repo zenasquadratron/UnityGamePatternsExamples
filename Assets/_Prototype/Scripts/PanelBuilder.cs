@@ -25,20 +25,20 @@ public class PanelBuilder : MonoBehaviour
         // create some panels
         foreach (PanelInfo pi in panels)
         {
-            GameObject panelClone = Instantiate(panelPrefab);
+            GameObject panelClone = Instantiate(panelPrefab, panelPrefab.transform.position, panelPrefab.transform.rotation );
             panelClone.SetActive(false);
             panelClone.transform.parent = parentPanel.transform;
             panelClone.GetComponent<Image>().color = pi.color;
 
-            GameObject labelClone = Instantiate(labelPrefab);
+            GameObject labelClone = Instantiate(labelPrefab, labelPrefab.transform.position, labelPrefab.transform.rotation);
             labelClone.transform.parent = panelClone.transform;
             labelClone.GetComponent<Text>().text = pi.name;
 
-            GameObject descClone = Instantiate(descPrefab);
+            GameObject descClone = Instantiate(descPrefab, descPrefab.transform.position, descPrefab.transform.rotation);
             descClone.transform.parent = panelClone.transform;
             descClone.GetComponent<Text>().text = pi.description;
 
-            GameObject buttonClone = Instantiate(buttonPrefab);
+            GameObject buttonClone = Instantiate(buttonPrefab, buttonPrefab.transform.position, buttonPrefab.transform.rotation);
             buttonClone.transform.parent = panelClone.transform;
             
         }

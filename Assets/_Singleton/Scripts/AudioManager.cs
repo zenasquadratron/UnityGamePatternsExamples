@@ -6,9 +6,9 @@ public class AudioManager
 {
     private static AudioManager instance;
 
-    private List<AudioClip> clips;
-    private string someString;
-    private int someInt;
+    private List<AudioClip> soundTrackClips;
+
+    private Dictionary<string, AudioClip> soundEffectClips;
 
     public static AudioManager Instance
     {
@@ -17,49 +17,60 @@ public class AudioManager
             // Lazy Initializion
             if (instance == null)
             {
-                instance = new AudioManager("a string", 0);
+                instance = new AudioManager();
             }
             return instance;
         }
     }
 
-    public AudioManager(string s, int i)
+    public AudioManager()
     {
-        clips = new List<AudioClip>();
-        someString = s;
-        someInt = i;
+        soundTrackClips = new List<AudioClip>();
+        soundEffectClips = new Dictionary<string, AudioClip>();
     }
 
-    public void SetString(string s)
-    {
-        someString = s;
-    }
-
-    public string GetString()
-    {
-        return someString;
-    }
 
     public void PlayAudio(int index, Vector3 pos)
     {
         // plays an audio clip
 
-        AudioSource.PlayClipAtPoint(clips[index], pos);
+        AudioSource.PlayClipAtPoint(soundTrackClips[index], pos);
+    }
+
+    public AudioClip GetAudioClip(int index)
+    {
+        return soundTrackClips[index];
+    }
+
+    public void PlayAudioByName(string value, Vector3 pos)
+    {
+        AudioSource.PlayClipAtPoint(soundEffectClips[value], pos);
     }
 
     public void AddClip(AudioClip clip)
     {
-        clips.Add(clip);
+        soundTrackClips.Add(clip);
+    }
+
+    public void AddClipByName(string s, AudioClip ac)
+    {
+        soundEffectClips.Add(s, ac);
     }
 
     public void RemoveClip(AudioClip clip)
     {
-        clips.Remove(clip);
+        soundTrackClips.Remove(clip);
     }
 
-    public void PlayRandomClip()
+    public void RemoveClipByName(string s)
     {
-        int randIndex = Random.Range(0, clips.Count);
-        AudioSource.PlayClipAtPoint(clips[randIndex], new Vector3(0, 0, 0));
+        soundEffectClips.Remove(s);
+    }
+
+    public void PlayRandomSoundEffect()
+    {
+        int randIndex = Random.Range(0, soundTrackClips.Count);
+        //AudioSource.PlayClipAtPoint(soundEffectClips.Keys.Element)
+        //AudioSource.PlayClipAtPoint(soundEffectClips[randIndex], new Vector3(0, 0, 0));
     }
 }
