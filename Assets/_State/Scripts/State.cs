@@ -65,7 +65,8 @@ public class Idle : State
     public override void Enter()
     {
         // do the Enter
-        anim.StopPlayback();
+        //anim.StopPlayback();
+        Debug.Log("Entering Idle State.");
 
         base.Enter();
     }
@@ -74,7 +75,9 @@ public class Idle : State
     {
         // do the Update
         // condition to exit
-        anim.Play("something");
+        ///anim.Play("something");
+        Debug.Log("Ima idlin!");
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             nextState = new State();
@@ -85,7 +88,8 @@ public class Idle : State
     public override void Exit()
     {
         // do the Exit
-        anim.StopPlayback();
+        //anim.StopPlayback();
+        Debug.Log("Exiting Idle State.");
         base.Exit();
     }
 }
@@ -104,14 +108,16 @@ public class Walk : State
     public override void Enter()
     {
         // do the Enter
-        anim.Play("Walk");
+        //anim.Play("Walk");
+        Debug.Log("Entering Walk State.");
         base.Enter();
     }
 
     public override void Update()
     {
         // do the Update
-        if (true)
+        Debug.Log("Ima walkin.");
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             nextState = new State();
             stage = EVENT.EXIT;
@@ -121,6 +127,7 @@ public class Walk : State
     public override void Exit()
     {
         // do the Exit
+        Debug.Log("Exiting Walk State.");
         base.Exit();
     }
 }
@@ -139,14 +146,16 @@ public class Attack : State
     public override void Enter()
     {
         // do the Enter
-        anim.Play("Attack");
+        //anim.Play("Attack");
+        Debug.Log("Entering Attack State.");
         base.Enter();
     }
 
     public override void Update()
     {
         // do the Update
-        if (true)
+        Debug.Log("Ima attacking.");
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             nextState = new State();
             stage = EVENT.EXIT;
@@ -156,6 +165,7 @@ public class Attack : State
     public override void Exit()
     {
         // do the Exit
+        Debug.Log("Exiting Attacking State.");
         base.Exit();
     }
 }

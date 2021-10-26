@@ -31,35 +31,39 @@ public class AI : MonoBehaviour
             currentState = new Walk(animator);
         }
 
-        switch(currentState.name)
+        switch(currentState.state)
         {
             case (State.STATE.ATTACK):
                 // Do Attack Stuff
-                OtherStuff();
+                AttackStuff();
                 break;
             case (State.STATE.IDLE):
                 // Do Idle Stuff
-                PickUpRoutine();
+                IdleStuff();
                 break;
             case (State.STATE.WALK):
                 // Do Walk Stuff
-                OtherStuff();
-                PickUpRoutine();
+                WalkStuff();
                 break;
             default:
                 break;
         }
 
-        //currentState = currentState.Process(animator);
+        currentState = currentState.Process();
     }
 
-    public void PickUpRoutine()
+    public void IdleStuff()
     {
-
+        Debug.Log("Whacha gonna do about it?");
     }
 
-    public void OtherStuff()
+    public void AttackStuff()
     {
+        Debug.Log("Attacking!");
+    }
 
+    public void WalkStuff()
+    {
+        Debug.Log("Just Walking.");
     }
 }
