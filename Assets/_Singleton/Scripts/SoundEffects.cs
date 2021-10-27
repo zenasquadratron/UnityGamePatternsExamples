@@ -43,11 +43,6 @@ public class SoundEffects : MonoBehaviour
         {
             AudioManager.Instance.PlayAudioByName("Laser", transform.position);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            AudioManager.Instance.PlayRandomSoundEffect();
-        }
-
     }
 }
 

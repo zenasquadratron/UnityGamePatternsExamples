@@ -66,11 +66,4 @@ public class AudioManager
     {
         soundEffectClips.Remove(s);
     }
-
-    public void PlayRandomSoundEffect()
-    {
-        int randIndex = Random.Range(0, soundTrackClips.Count);
-        //AudioSource.PlayClipAtPoint(soundEffectClips.Keys.Element)
-        //AudioSource.PlayClipAtPoint(soundEffectClips[randIndex], new Vector3(0, 0, 0));
-    }
 }
