@@ -7,6 +7,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private int poolCount = 4;
 
+    //private GameObject[] enemies;
     private List<GameObject> enemyPool = new List<GameObject>();
     private int nextAvailablePooledEnemy = 0;
 
@@ -16,14 +17,17 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //GameObject[] temp = new GameObject[poolCount];
+
         for (int i = 0; i < poolCount; i++)
         {
             GameObject clone = Instantiate(enemyPrefab) as GameObject;
             clone.SetActive(false);
             clone.transform.position = new Vector3(i + 0.5f, 0, 0);
-            enemyPool.Add(clone);
+            //enemyPool.Add(clone);
 
-            pooledObjects.Add(new PooledObjectInfo(clone.name + i, false, clone));
+            clone.GetComponent<EnemyController>().poi = new PooledObjectInfo(clone.name + i, false, clone);
+            pooledObjects.Add(clone.GetComponent<EnemyController>().poi);
             
         }
 
@@ -35,12 +39,12 @@ public class SpawnManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            ActivateEnemy();
+            //ActivateEnemy();
         }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-            DeactivateEnemy();
+            //DeactivateEnemy();
         }
 
         if (Input.GetKeyDown(KeyCode.S))
@@ -74,10 +78,15 @@ public class SpawnManager : MonoBehaviour
                 poi.inUse = true;
                 poi.go.SetActive(true);
                 activatedObjected = poi;
-                poi.go.GetComponent<EnemyController>().poi = poi;
+                
                 Debug.Log(poi.name + " has been activated");
                 break;
             }
+
+            //if (poi.go.active == false)
+            //{
+
+            //}
         }
 
         if (activatedObjected == null)
@@ -121,6 +130,11 @@ public class SpawnManager : MonoBehaviour
         {
             Debug.Log("No active enemies to deactivate!");
         }
+    }
+
+    public void DeactivatePooledObject()
+    {
+
     }
 }
 
