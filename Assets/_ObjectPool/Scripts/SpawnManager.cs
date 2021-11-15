@@ -10,6 +10,9 @@ public class SpawnManager : MonoBehaviour
     private List<GameObject> enemyPool = new List<GameObject>();
     private int nextAvailablePooledEnemy = 0;
 
+    private List<PooledObjectInfo> pooledObjects = new List<PooledObjectInfo>();
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +22,8 @@ public class SpawnManager : MonoBehaviour
             clone.SetActive(false);
             clone.transform.position = new Vector3(i + 0.5f, 0, 0);
             enemyPool.Add(clone);
+
+            pooledObjects.Add(new PooledObjectInfo(clone.name + i, false, clone));
             
         }
 
@@ -37,6 +42,11 @@ public class SpawnManager : MonoBehaviour
         {
             DeactivateEnemy();
         }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            ActivatePooledObject();
+        }
     }
 
     public void ActivateEnemy()
@@ -53,6 +63,29 @@ public class SpawnManager : MonoBehaviour
 
     }
 
+    public void ActivatePooledObject()
+    {
+        PooledObjectInfo activatedObjected = null;
+
+        foreach (PooledObjectInfo poi in pooledObjects)
+        {
+            if (!poi.inUse)
+            {
+                poi.inUse = true;
+                poi.go.SetActive(true);
+                activatedObjected = poi;
+                poi.go.GetComponent<EnemyController>().poi = poi;
+                Debug.Log(poi.name + " has been activated");
+                break;
+            }
+        }
+
+        if (activatedObjected == null)
+        {
+            Debug.Log("No more pooled objects available!");
+        }
+    }
+
     public void DeactivateEnemy()
     {
         if (nextAvailablePooledEnemy < enemyPool.Count)
@@ -65,5 +98,43 @@ public class SpawnManager : MonoBehaviour
             Debug.Log("No active enemies to deactivate!");
         }
 
+    }
+
+    public void DeactivatePooledObject(PooledObjectInfo poi)
+    {
+        PooledObjectInfo deactivatedObject = null;
+
+        foreach (PooledObjectInfo po in pooledObjects)
+        {
+            if (po == poi)
+            {
+                po.go.SetActive(false);
+                po.inUse = false;
+                deactivatedObject = po;
+
+                Debug.Log(po.name + " has been deactivated");
+                break;
+            }
+        }
+
+        if (deactivatedObject == null)
+        {
+            Debug.Log("No active enemies to deactivate!");
+        }
+    }
+}
+
+[System.Serializable]
+public class PooledObjectInfo
+{
+    public string name;
+    public bool inUse;
+    public GameObject go;
+
+    public PooledObjectInfo(string _name, bool _inUse, GameObject _gameobject)
+    {
+        name = _name;
+        inUse = _inUse;
+        go = _gameobject;
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public PooledObjectInfo poi;
+
     [SerializeField] private float lifespan = 0.5f;
 
     private SpawnManager spawnManager;
@@ -23,7 +25,9 @@ public class EnemyController : MonoBehaviour
 
         if (timer >= lifespan)
         {
-            spawnManager.DeactivateEnemy();
+            //spawnManager.DeactivateEnemy();
+            Debug.Log(poi.name + " is deactivating!");
+            spawnManager.DeactivatePooledObject(poi);
             timer = 0;
         }
     }
